@@ -113,33 +113,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // returns allExpenses for a user
-    // if there was an error, returns "error"
-    // otherwise returns allExpenses
-    // trackdatcash.herokuapp.com/getAllExpenses
-    public static String getAllExpenses(String url, String userId){
-        String allExpenses;
-        JSONObject payload = new JSONObject();
-
-        // create payload
-        try{
-            payload.put("id", userId);
-        }
-        catch(Exception ex){
-            return "error";
-        }
-
-        // return all expenses as string
-        try{
-            allExpenses = JsonIo.doJsonIo(url, payload.toString()).toString();
-            if(allExpenses == "error")
-                return "error";
-            return allExpenses;
-        }
-        catch(Exception ex){
-            return "error";
-        }
-    }
 
     // delete route - Not a post route so we wont use it
 //    public static String delete(String url){
@@ -284,8 +257,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Route to return all expenses for a specific month
+    // Will return "error" on error
+    //
+    // trackdatcash.herokuapp.com/month/:newMonth
 
-    // trackdatcash.herokuapp.com/code/:thisCode
     public static String getMonth(String url, String userId){
         JSONObject payload = new JSONObject();
         String getMonth;
@@ -309,6 +284,59 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // Route to return all expenses for a specific category
+    // Will return "error" on error
+    // trackdatcash.herokuapp.com/category/:newCategory
+    public static String getCategory(String url, String userId){
+        JSONObject payload = new JSONObject();
+        String getCategory;
+        try{
+            payload.put("userId", userId);
+        }
+        catch(Exception ex){
+            return "error";
+        }
+
+        try{
+            getCategory = JsonIo.doJsonIo(url, payload.toString()).toString();
+            if(getCategory == "error")
+                return "error";
+
+            return getCategory;
+        }
+        catch(Exception ex) {
+            return "error";
+        }
+    }
+
+
+    // returns allExpenses for a user
+    // if there was an error, returns "error"
+    // otherwise returns allExpenses
+    // trackdatcash.herokuapp.com/getAllExpenses
+    public static String getAllExpenses(String url, String userId){
+        String allExpenses;
+        JSONObject payload = new JSONObject();
+
+        // create payload
+        try{
+            payload.put("id", userId);
+        }
+        catch(Exception ex){
+            return "error";
+        }
+
+        // return all expenses as string
+        try{
+            allExpenses = JsonIo.doJsonIo(url, payload.toString()).toString();
+            if(allExpenses == "error")
+                return "error";
+            return allExpenses;
+        }
+        catch(Exception ex){
+            return "error";
+        }
+    }
 
 
 
