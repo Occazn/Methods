@@ -13,6 +13,7 @@ public class AddUpdate {
                                 String month, String day, String year, String groupCode){
 
         JSONObject payload = new JSONObject();
+        JSONObject test;
         String update = "";
         try{
             payload.put("description", description);
@@ -32,7 +33,9 @@ public class AddUpdate {
         }
 
         try{
-            update = JsonIo.doJsonIo(url, payload.toString()).toString();
+            test = JsonIo.doJsonIo(url, payload.toString());
+            update = test.toString();
+
             if(update == "error"){
                 return "error";
             }

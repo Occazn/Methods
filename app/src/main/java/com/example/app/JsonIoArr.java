@@ -1,5 +1,7 @@
 package com.example.app;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -9,7 +11,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class JsonIo
+public class JsonIoArr
 {
 
     public static class MyThread extends Thread implements Runnable
@@ -27,8 +29,7 @@ public class JsonIo
             String ret = sendPostRequest(url, payload);
             try
             {
-                jobj = new JSONObject(ret);
-
+                jobj = new JSONArray(ret);
             }
             catch(Exception ex){
 
@@ -36,8 +37,8 @@ public class JsonIo
         }
     }
 
-    public static JSONObject jobj = null;
-    public static JSONObject doJsonIo( String url, String payload )
+    public static JSONArray jobj = null;
+    public static JSONArray doJsonIo(String url, String payload )
     {
         jobj = null;
 

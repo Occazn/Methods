@@ -68,7 +68,7 @@ public class Authentication {
     // on success, will return string of true and string of false on error
     public static String register(String url, String name, String email, String password){
         JSONObject payload = new JSONObject();
-
+        JSONObject temp;
         String register;
 
         try{
@@ -81,7 +81,8 @@ public class Authentication {
         }
 
         try{
-            register = JsonIo.doJsonIo(url, payload.toString()).toString();
+            temp = JsonIo.doJsonIo(url, payload.toString());
+            register = temp.toString();
             if(register == "error")
                 return register;
 

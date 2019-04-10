@@ -1,5 +1,6 @@
 package com.example.app;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class ReturnExpense {
@@ -9,23 +10,25 @@ public class ReturnExpense {
     // trackdatcash.herokuapp.com/codeMount
     public static String getUser(String url, String userId){
         JSONObject payload = new JSONObject();
+        JSONObject test;
         String getUser;
         try{
-            payload.put("userId", userId);
+            payload.put("id", userId);
         }
         catch(Exception ex){
             return "error";
         }
 
         try{
-            getUser = JsonIo.doJsonIo(url, payload.toString()).toString();
+            test = JsonIo.doJsonIo(url, payload.toString());
+            getUser = test.toString();
             if(getUser == "error")
                 return "error";
 
             return getUser;
         }
         catch(Exception ex) {
-            return "error in ex";
+            return "error";
         }
     }
 
@@ -37,6 +40,7 @@ public class ReturnExpense {
     // Although thisCode will be in the parameters (Url), we will need to pass it as a String as groupCode
     public static String returnAll(String url, String groupCode){
         JSONObject payload = new JSONObject();
+        JSONArray test;
         String returnAll;
         try{
             payload.put("groupCode", groupCode);
@@ -46,7 +50,8 @@ public class ReturnExpense {
         }
 
         try{
-            returnAll = JsonIo.doJsonIo(url, payload.toString()).toString();
+            test = JsonIoArr.doJsonIo(url, payload.toString());
+            returnAll = test.toString();
             if(returnAll == "error")
                 return "error";
 
@@ -58,26 +63,23 @@ public class ReturnExpense {
     }
 
 
-
-
-
     // Route to return all expenses for a specific month
     // Will return "error" on error
-    //
     // trackdatcash.herokuapp.com/month/:newMonth
-
     public static String getMonth(String url, String userId){
         JSONObject payload = new JSONObject();
+        JSONArray temp;
         String getMonth;
         try{
-            payload.put("userId", userId);
+            payload.put("id", userId);
         }
         catch(Exception ex){
             return "error";
         }
 
         try{
-            getMonth = JsonIo.doJsonIo(url, payload.toString()).toString();
+            temp = JsonIoArr.doJsonIo(url, payload.toString());
+            getMonth = temp.toString();
             if(getMonth == "error")
                 return "error";
 
@@ -94,16 +96,18 @@ public class ReturnExpense {
     // trackdatcash.herokuapp.com/category/:newCategory
     public static String getCategory(String url, String userId){
         JSONObject payload = new JSONObject();
+        JSONArray temp;
         String getCategory;
         try{
-            payload.put("userId", userId);
+            payload.put("id", userId);
         }
         catch(Exception ex){
             return "error";
         }
 
         try{
-            getCategory = JsonIo.doJsonIo(url, payload.toString()).toString();
+            temp = JsonIoArr.doJsonIo(url, payload.toString());
+            getCategory = temp.toString();
             if(getCategory == "error")
                 return "error";
 
