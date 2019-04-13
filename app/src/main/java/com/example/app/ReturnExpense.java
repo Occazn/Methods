@@ -126,7 +126,7 @@ public class ReturnExpense {
     public static String getAllExpenses(String url, String userId){
         String allExpenses;
         JSONObject payload = new JSONObject();
-
+        JSONArray temp;
         // create payload
         try{
             payload.put("id", userId);
@@ -137,13 +137,14 @@ public class ReturnExpense {
 
         // return all expenses as string
         try{
-            allExpenses = JsonIo.doJsonIo(url, payload.toString()).toString();
+            temp = JsonIoArr.doJsonIo(url, payload.toString());
+            allExpenses = temp.toString();
             if(allExpenses == "error")
                 return "error";
             return allExpenses;
         }
         catch(Exception ex){
-            return "error";
+            return "errors";
         }
     }
 }
